@@ -2,6 +2,7 @@ import 'package:chatpp/Models/ChatModel.dart';
 import 'package:chatpp/Screens/CreateGroup.dart';
 import 'package:chatpp/customUI/ButtonCard.dart';
 import 'package:chatpp/customUI/ContactsCard.dart';
+import 'package:chatpp/pages/IndividualChatPage.dart';
 import 'package:flutter/material.dart';
  class ContactSelection extends StatefulWidget {
    const ContactSelection({super.key});
@@ -12,8 +13,8 @@ import 'package:flutter/material.dart';
    @override
    Widget build(BuildContext context) {
      List<ChatModel> contacts = [
-      ChatModel( "sanna","personImage.svg", false, "4:00", "", "I am free to chat between 4 to 6 pm"),
-      ChatModel( "chacha","personImage.svg", false, "4:00", "", "I am free to chat between 10 to 12 pm"),
+      ChatModel(1, "sanna","personImage.svg", false, "4:00", "", "I am free to chat between 4 to 6 pm"),
+      ChatModel( 2, "chacha","personImage.svg", false, "4:00", "", "I am free to chat between 10 to 12 pm"),
      ];
      return Scaffold(
         appBar: AppBar(title: Column(
@@ -71,7 +72,14 @@ import 'package:flutter/material.dart';
             return ButtonCard("New person", Icons.person);
 
           }
-              return ContactCard(contacts[index-2]);
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                   return Container();
+                    // return IndividualChat(contacts[index]);
+                  },));
+                },
+                child: ContactCard(contacts[index-2]));
         },
         
         )

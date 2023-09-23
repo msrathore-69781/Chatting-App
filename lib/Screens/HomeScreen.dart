@@ -1,3 +1,4 @@
+import 'package:chatpp/pages/CameraPage.dart';
 import 'package:chatpp/pages/chattingPage.dart';
 import 'package:flutter/material.dart';
 
@@ -46,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen>
           indicatorColor: Colors.white,
           controller: contl,
           tabs: [
-            Tab(
-              icon: Icon(Icons.camera),
-            ),
+            // Tab(
+            //   icon: Icon(Icons.camera),
+            // ),
             Tab(
               text: "Chat",
             ),
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       body: TabBarView(controller: contl, children: [
-        Text("Camera"),
+        // CameraPage(),
         ChattingPage(),
         Text("Status"),
         Text("Calls"),

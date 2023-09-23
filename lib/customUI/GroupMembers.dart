@@ -1,10 +1,11 @@
+import 'package:chatpp/Models/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 
 class GroupMember extends StatelessWidget {
-  const GroupMember({super.key});
-
+  const GroupMember(this.contacts);
+  final ChatModel contacts;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +33,9 @@ class GroupMember extends StatelessWidget {
                     child: Icon(Icons.clear)),
                 )]
               ),
-              Text("name",style: TextStyle(color: Colors.white,fontSize: 18),)
+              SizedBox(height: 2,),
+
+              Text(contacts.name,style: TextStyle(color: Colors.white,fontSize: 18),)
         ],
       ),
     );
