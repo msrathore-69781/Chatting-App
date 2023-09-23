@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatCard extends StatefulWidget {
   final ChatModel chtmdl;
-  const ChatCard({Key? key, required this.chtmdl}) : super(key: key);
+  final ChatModel sourceChat;
+  
+ChatCard(this.chtmdl,this.sourceChat);
 
   @override
   State<ChatCard> createState() => _ChatCardState();
@@ -17,7 +19,7 @@ class _ChatCardState extends State<ChatCard> {
     return InkWell(
       onTap: () {
          Navigator.push(context, MaterialPageRoute(builder: (context) {
-           return IndividualChat(widget.chtmdl);
+           return IndividualChat(widget.chtmdl,widget.sourceChat);
          },));
       },
       child: Column(

@@ -1,9 +1,12 @@
+import 'package:chatpp/Models/ChatModel.dart';
 import 'package:chatpp/pages/CameraPage.dart';
 import 'package:chatpp/pages/chattingPage.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  List<ChatModel> chatModels;
+  final ChatModel sourceChat;
+  HomeScreen(this.chatModels,this.sourceChat);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           PopupMenuButton<String>(
             onSelected: (value) {
-              print(value); 
+              print(value);
             },
             itemBuilder: (BuildContext context) {
               return [
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: TabBarView(controller: contl, children: [
         // CameraPage(),
-        ChattingPage(),
+        ChattingPage(widget.chatModels,widget.sourceChat),
         Text("Status"),
         Text("Calls"),
       ]),

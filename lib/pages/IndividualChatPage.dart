@@ -8,7 +8,9 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualChat extends StatefulWidget {
   final ChatModel chmdl;
-  const IndividualChat(this.chmdl);
+  final sourceChat;
+
+  const IndividualChat(this.chmdl, this.sourceChat);
 
   @override
   State<IndividualChat> createState() => _IndividualChatState();
@@ -16,12 +18,12 @@ class IndividualChat extends StatefulWidget {
 
 class _IndividualChatState extends State<IndividualChat> {
   bool showEmoji = false;
+  bool sendButton = false;
   FocusNode focusNode = FocusNode();
   TextEditingController _controller = TextEditingController();
   late IO.Socket socket;
   @override
   void initState() {
-    
     // TO DO: implement initState
     super.initState();
     connect();
@@ -33,29 +35,33 @@ class _IndividualChatState extends State<IndividualChat> {
       }
     });
   }
-void connect(){
-  socket = IO.io("http://10.7.38.92:8000",<String,dynamic>{
-    "transports":["websocket"],
-    "autoConnect":false,
 
-  });
-  socket.connect();
-  socket.onConnect((data) => print("connected"));
-  print(socket.connected);
+  void connect() {
+    socket = IO.io("http://10.7.38.92:8000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.onConnect((data) => print("connected"));
+    print(socket.connected);
 
-socket.onConnectError((error) {
-  print("Connection Error: $error");
-});
+    socket.onConnectError((error) {
+      print("Connection Error: $error");
+    });
 
-socket.onError((error) {
-  print("Socket Error: $error");
-});
+    socket.onError((error) {
+      print("Socket Error: $error");
+    });
 
 //send the message from frontend to the backend
-socket.emit("/test","hello bhai from sanna");
+    socket.emit("/signin", widget.sourceChat.id);
+  }
 
+  void sendMessage(String message, int sourceId, int targetId) {
+    socket.emit("/message",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
+  }
 
-}
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -158,19 +164,33 @@ socket.emit("/test","hello bhai from sanna");
               },
               child: Stack(
                 children: [
-                  Container(height: height*0.8,
+                  Container(
+                    height: height * 0.8,
                     child: ListView(
-                      children: [OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),
-                      OurMessage(), ReplyCart(),],
+                      children: [
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                        OurMessage(),
+                        ReplyCart(),
+                      ],
                     ),
                   ),
                   Padding(
@@ -192,6 +212,15 @@ socket.emit("/test","hello bhai from sanna");
                                             borderRadius:
                                                 BorderRadius.circular(20)),
                                         child: TextFormField(
+                                          onChanged: (value) {
+                                            if (value.length > 0) {
+                                              setState(() {
+                                                sendButton = true;
+                                              });
+                                            } else {
+                                              sendButton = false;
+                                            }
+                                          },
                                           focusNode: focusNode,
                                           textAlignVertical:
                                               TextAlignVertical.center,
@@ -247,8 +276,17 @@ socket.emit("/test","hello bhai from sanna");
                                   backgroundColor: Colors.black,
                                   radius: 20,
                                   child: IconButton(
-                                    icon: Icon(Icons.mic),
-                                    onPressed: () {},
+                                    icon: Icon(
+                                        sendButton ? Icons.send : Icons.mic),
+                                    onPressed: () {
+                                      if (sendButton) {
+                                        sendMessage(
+                                            _controller.text,
+                                            widget.sourceChat.id,
+                                            widget.chmdl.id);
+                                            _controller.clear();
+                                      }
+                                    },
                                   ),
                                 ),
                               )

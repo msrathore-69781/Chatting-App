@@ -1,4 +1,5 @@
 import 'package:chatpp/Models/ChatModel.dart';
+import 'package:chatpp/Screens/HomeScreen.dart';
 import 'package:chatpp/customUI/ButtonCard.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late ChatModel sourceChat;
+
   List<ChatModel> chats = [
     ChatModel(
         1, "sanna", "personImage.svg", false, "4:00", "Nice job bhaiya", ""),
@@ -23,7 +26,16 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ListView.builder(
         itemCount: chats.length,
         itemBuilder: (context, index) {
-          return ButtonCard(chats[index].name, Icons.person);
+          return InkWell(
+              onTap: () {
+                sourceChat = chats.removeAt(index);
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) {
+                    return HomeScreen(chats,sourceChat );
+                  },
+                ));
+              },
+              child: ButtonCard(chats[index].name, Icons.person));
         },
       ),
     );
