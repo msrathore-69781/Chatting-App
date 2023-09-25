@@ -5,6 +5,8 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 
 class IndividualChat extends StatefulWidget {
   final ChatModel chmdl;
@@ -37,7 +39,7 @@ class _IndividualChatState extends State<IndividualChat> {
   }
 
   void connect() {
-    socket = IO.io("http://10.7.38.92:8000", <String, dynamic>{
+    socket = IO.io("http://10.7.15.119:8000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
@@ -54,7 +56,7 @@ class _IndividualChatState extends State<IndividualChat> {
     });
 
 //send the message from frontend to the backend
-    socket.emit("/signin", widget.sourceChat.id);
+    // socket.emit("/signin", widget.sourceChat.id);
   }
 
   void sendMessage(String message, int sourceId, int targetId) {
@@ -284,7 +286,7 @@ class _IndividualChatState extends State<IndividualChat> {
                                             _controller.text,
                                             widget.sourceChat.id,
                                             widget.chmdl.id);
-                                            _controller.clear();
+                                            _controller.clear(); 
                                       }
                                     },
                                   ),

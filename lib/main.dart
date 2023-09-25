@@ -1,8 +1,13 @@
 import 'package:camera/camera.dart';
+import 'package:chatpp/NewScreen/LandingPage.dart';
+import 'package:chatpp/NewScreen/LoginPage.dart';
 import 'package:chatpp/Screens/CameraScreen.dart';
+import 'package:chatpp/Screens/ContactSelection.dart';
+import 'package:chatpp/Screens/CreateGroup.dart';
 import 'package:chatpp/Screens/HomeScreen.dart';
 import 'package:chatpp/Screens/LoginScreen.dart';
 import 'package:chatpp/pages/CameraPage.dart';
+import 'package:chatpp/pages/IndividualChatPage.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async{

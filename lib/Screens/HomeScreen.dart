@@ -2,11 +2,12 @@ import 'package:chatpp/Models/ChatModel.dart';
 import 'package:chatpp/pages/CameraPage.dart';
 import 'package:chatpp/pages/chattingPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   List<ChatModel> chatModels;
   final ChatModel sourceChat;
-  HomeScreen(this.chatModels,this.sourceChat);
+  HomeScreen(this.chatModels, this.sourceChat);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,7 +28,20 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          InkWell(
+            onTap: () {},
+            child: CircleAvatar(
+              backgroundColor: Colors.black,
+              radius: 25,
+              child: SvgPicture.asset(
+                "assets/robotChat.svg",
+                color: Colors.white,
+                height: 25,
+                width: 25,
+              ),
+            ),
+          ),
+          // IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           PopupMenuButton<String>(
             onSelected: (value) {
               print(value);
@@ -56,9 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
             Tab(
               text: "Chat",
             ),
-            Tab(
-              text: "Status",
-            ),
+
             Tab(
               text: "Calls",
             ),
@@ -67,8 +79,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: TabBarView(controller: contl, children: [
         // CameraPage(),
-        ChattingPage(widget.chatModels,widget.sourceChat),
-        Text("Status"),
+        ChattingPage(widget.chatModels, widget.sourceChat),
         Text("Calls"),
       ]),
     );
