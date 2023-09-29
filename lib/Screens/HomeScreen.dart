@@ -33,12 +33,12 @@ class _HomeScreenState extends State<HomeScreen>
             child: CircleAvatar(
               backgroundColor: Colors.black,
               radius: 25,
-              child: SvgPicture.asset(
-                "assets/robotChat.svg",
-                color: Colors.white,
-                height: 25,
-                width: 25,
-              ),
+              // child: SvgPicture.asset(
+              //   "assets/robotChat.svg",
+              //   color: Colors.white,
+              //   height: 25,
+              //   width: 25,
+              // ),
             ),
           ),
           // IconButton(onPressed: () {}, icon: Icon(Icons.search)),
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
         centerTitle: true,
-        title: Text("something creative"),
+        title: Text("SANN"),
         bottom: TabBar(
           indicatorColor: Colors.white,
           controller: contl,
@@ -68,11 +68,7 @@ class _HomeScreenState extends State<HomeScreen>
             //   icon: Icon(Icons.camera),
             // ),
             Tab(
-              text: "Chat",
-            ),
-
-            Tab(
-              text: "Calls",
+              text: "Chats",
             ),
           ],
         ),
@@ -80,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen>
       body: TabBarView(controller: contl, children: [
         // CameraPage(),
         ChattingPage(widget.chatModels, widget.sourceChat),
-        Text("Calls"),
       ]),
     );
   }

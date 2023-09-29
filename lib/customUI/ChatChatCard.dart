@@ -57,7 +57,7 @@ class _ChatCardState extends State<ChatCard> {
               widget.chtmdl.name,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(widget.chtmdl.currentMessage),
+            // subtitle: Text(widget.chtmdl.currentMessage),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 80, right: 20),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ReplyCart extends StatelessWidget {
-  const ReplyCart({super.key});
+  String msg;
+ ReplyCart(this.msg);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,8 @@ class ReplyCart extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 10, right: 50, top: 10, bottom: 20),
                 child: Text(
-                  "reply to our message",
+                  msg,
+
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),
@@ -31,7 +33,7 @@ class ReplyCart extends StatelessWidget {
                 bottom: 4,
                 right: 10,
                 child: Text(
-                  "23:00",
+                  "",
                   style: TextStyle(color: Colors.black),
                 ),
               )

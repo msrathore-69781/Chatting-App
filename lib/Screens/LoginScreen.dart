@@ -12,13 +12,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late ChatModel sourceChat;
-
   List<ChatModel> chats = [
     ChatModel(
         1, "sanna", "personImage.svg", false, "4:00", "Nice job bhaiya", ""),
     ChatModel(
         2, "Chacha", "personImage.svg", false, "8:00", "Nice job beta", ""),
-    ChatModel(101, "Family", "groupsImage.svg", true, "5:00", "Damn bruh", "")
+    ChatModel(101, "Family", "groupsImage.svg", true, "5:00", "Damn bruh", ""),
+ChatModel(
+        2, "tinku", "personImage.svg", false, "8:00", "see yaa!!", ""),
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,12 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 sourceChat = chats.removeAt(index);
                 Navigator.pushReplacement(context, MaterialPageRoute(
+
                   builder: (context) {
                     return HomeScreen(chats, sourceChat);
                   },
-                ));
+                )
+                );
               },
               child: ButtonCard(chats[index].name, Icons.person));
         },

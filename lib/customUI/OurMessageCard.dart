@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OurMessage extends StatelessWidget {
-  const OurMessage({super.key});
+  String msg;
+
+  OurMessage(this.msg);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,8 @@ class OurMessage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 10, right: 50, top: 10, bottom: 20),
-                child: Text(
-                  "Message typed by uskdnmflkdnslfnkndflknsdlfnksknflskdnfdnfdkc ksndkdnf dcksdnfklnf csdlkfnf ceiknfdc csnnkd ckdcslk",
+                child: Text(msg,
+                  // "Message typed by uskdnmflkdnslfnkndflknsdlfnksknflskdnfdnfdkc ksndkdnf dcksdnfklnf csdlkfnf ceiknfdc csnnkd ckdcslk",
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
@@ -33,7 +35,7 @@ class OurMessage extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "23:00",
+                      "",
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(

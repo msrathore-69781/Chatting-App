@@ -1,22 +1,21 @@
 import 'package:chatpp/Models/CountryModel.dart';
 import 'package:chatpp/NewScreen/CountryPage.dart';
-import 'package:chatpp/NewScreen/SignUp.dart';
-import 'package:chatpp/Screens/LoginScreen.dart';
+import 'package:chatpp/NewScreen/LoginPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUP extends StatefulWidget {
+  const SignUP({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUP> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<SignUP> {
   String email = "";
   String password = "";
-   String name = "";
+  String name = "";
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerPassword = TextEditingController();
@@ -53,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.black,
         elevation: 0,
         title: Text(
-          "LOGIN",
+          "SignUp",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w700,
@@ -75,10 +74,38 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Enter your name"),
+                SizedBox(
+                  width: 50,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.5 - 50,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                    color: Colors.black,
+                    width: 1.8,
+                  ))),
+                  child: TextFormField(
+                    controller: _controllerName,
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(9),
+                        hintText: "Enter Name"),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text("Enter your email id"),
-
-                SizedBox(width: 30,),
+                SizedBox(
+                  width: 20,
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width / 1.5 - 50,
                   decoration: BoxDecoration(
@@ -95,36 +122,13 @@ class _LoginPageState extends State<LoginPage> {
                         contentPadding: EdgeInsets.all(9),
                         hintText: "Enter email id"),
                   ),
-                )
+                ),
               ],
             ),
-            // Row(
-            //   children: [
-            //     Text("Enter your password"),
-            //      SizedBox(width: 20,),
-            //     Container(
-            //       width: MediaQuery.of(context).size.width / 1.5 - 50,
-            //       decoration: BoxDecoration(
-            //           border: Border(
-            //               bottom: BorderSide(
-            //         color: Colors.black,
-            //         width: 1.8,
-            //       ))),
-            //       child: TextFormField(
-            //         controller: _controllerPassword,
-            //         keyboardType: TextInputType.visiblePassword,
-            //         decoration: InputDecoration(
-            //             border: InputBorder.none,
-            //             contentPadding: EdgeInsets.all(9),
-            //             hintText: "Enter password"),
-            //       ),
-            //     )
-            //   ],
-            // ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("Enter password"),
-                 SizedBox(width: 50,),
+                Text("Enter your password"),
                 Container(
                   width: MediaQuery.of(context).size.width / 1.5 - 50,
                   decoration: BoxDecoration(
@@ -134,41 +138,66 @@ class _LoginPageState extends State<LoginPage> {
                     width: 1.8,
                   ))),
                   child: TextFormField(
-                    controller: _controllerName,
-                    keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
+                    controller: _controllerPassword,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(9),
-                        hintText: "Enter your password"),
+                        hintText: "Enter password"),
                   ),
                 )
               ],
             ),
-            SizedBox(height: 30,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Confirm your password"),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.5 - 50,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                    color: Colors.black,
+                    width: 1.8,
+                  ))),
+                  child: TextFormField(
+                    obscureText: true,
+                    controller: _controllerPassword,
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(9),
+                        hintText: "Enter your password again"),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 20,),
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.black)),
                 onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return LoginScreen();
-            },));                  setState(() {
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+
+                  builder: (context) {
+                   return LoginPage();
+                  },
+                )
+                );
+                  setState(() {
                     name = _controllerName.text.toString();
                     email = _controllerEmail.text.toString();
                     password = _controllerPassword.text.toString();
                   });
-                    sendMessage(email, password);
-                
+                  sendMessage(email, password);
                 },
-                child: Text("Login")),
-                Text("You dont have an account?"),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return SignUP();
-                    },));
-                  },
-                  child: Text("Click here!!",style: TextStyle(color:Colors.red),))
+                child: Text("Signup")),
+                
+
           ],
         ),
       ),
@@ -246,8 +275,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void sendMessage(String email, String password) {
-    socket.emit("login", {"name":name,
-    "email": email, "password": password});
+    socket.emit("sigup", {"name": name, "email": email, "password": password});
     // print(email);
   }
   // Widget countryCard() {
@@ -344,6 +372,7 @@ class _LoginPageState extends State<LoginPage> {
       return false;
     }
     setState(() {
+      ;
       email = email;
       password = password;
     });

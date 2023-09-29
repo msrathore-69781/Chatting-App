@@ -39,7 +39,7 @@ class _IndividualChatState extends State<IndividualChat> {
   }
 
   void connect() {
-    socket = IO.io("http://10.7.15.119:8000", <String, dynamic>{
+    socket = IO.io("http://10.7.15.119:8080", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
@@ -59,10 +59,7 @@ class _IndividualChatState extends State<IndividualChat> {
     // socket.emit("/signin", widget.sourceChat.id);
   }
 
-  void sendMessage(String message, int sourceId, int targetId) {
-    socket.emit("/message",
-        {"message": message, "sourceId": sourceId, "targetId": targetId});
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,8 +109,8 @@ class _IndividualChatState extends State<IndividualChat> {
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "Last seen at 12:00Pm",
+                    Text("",
+                      // "Last seen at 12:00Pm",
                       style: TextStyle(
                           fontSize: 12, fontWeight: FontWeight.normal),
                     )
@@ -122,8 +119,8 @@ class _IndividualChatState extends State<IndividualChat> {
               ),
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.call_outlined)),
-              IconButton(onPressed: () {}, icon: Icon(Icons.videocam_rounded)),
+              // IconButton(onPressed: () {}, icon: Icon(Icons.call_outlined)),
+              // IconButton(onPressed: () {}, icon: Icon(Icons.videocam_rounded)),
               PopupMenuButton<String>(
                 onSelected: (value) {
                   print(value);
@@ -170,28 +167,15 @@ class _IndividualChatState extends State<IndividualChat> {
                     height: height * 0.8,
                     child: ListView(
                       children: [
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
-                        OurMessage(),
-                        ReplyCart(),
+                        // Text("Hi"),
+                        OurMessage(" Hi sis! how are you??🫣 "),
+                        ReplyCart("Hello! I m good bhaiya!"),
+                        // OurMessage(),
+                        ReplyCart("You say?!🫣"),
+                        // OurMessage(),
+                        ReplyCart("Long time no see?!"),
+                       OurMessage("Ya was stuck with some important stuff"),
+                       
                       ],
                     ),
                   ),
@@ -341,7 +325,11 @@ class _IndividualChatState extends State<IndividualChat> {
       ],
     );
   }
-
+  void sendMessage(String message, int sourceId, int targetId) {
+    socket.emit("login",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
+        print("ijijd");
+  }
   Widget bottomSheet() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.25,

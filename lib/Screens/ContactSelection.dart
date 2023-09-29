@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
      List<ChatModel> contacts = [
       ChatModel(1, "sanna","personImage.svg", false, "4:00", "", "I am free to chat between 4 to 6 pm"),
       ChatModel( 2, "chacha","personImage.svg", false, "4:00", "", "I am free to chat between 10 to 12 pm"),
+      ChatModel( 2, "tinku","personImage.svg", false, "4:00", "", "I am free to chat between 8 to 10 am"),
      ];
      return Scaffold(
         appBar: AppBar(title: Column(
@@ -56,7 +57,7 @@ import 'package:flutter/material.dart';
         ],
         ),
         body: ListView.builder(
-           itemCount: contacts.length+2,
+           itemCount: contacts.length+1,
           itemBuilder: (context, index) {
       
           if(index == 0 ){
@@ -68,10 +69,7 @@ import 'package:flutter/material.dart';
               },
               child: ButtonCard("New group",Icons.group_add));
           }
-          else if(index ==1){
-            return ButtonCard("New person", Icons.person);
-
-          }
+          
               return InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -79,7 +77,7 @@ import 'package:flutter/material.dart';
                     // return IndividualChat(contacts[index]);
                   },));
                 },
-                child: ContactCard(contacts[index-2]));
+                child: ContactCard(contacts[index-1]));
         },
         
         )
